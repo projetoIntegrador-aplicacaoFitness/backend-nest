@@ -4,10 +4,10 @@ import { CategoriaService } from "../services/categoria.service";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
-@ApiTags('Categoria')
+@ApiTags('Treino')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller("/categorias")
+@Controller("/treinos")
 export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) { }
 
