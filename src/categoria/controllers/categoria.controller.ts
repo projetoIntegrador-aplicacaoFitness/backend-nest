@@ -29,6 +29,13 @@ export class CategoriaController {
     return this.categoriaService.findByDescricao(descricao);
   }
 
+  @Get('/:id/exercicios')
+  @HttpCode(HttpStatus.OK)
+  findExerciciosByCategoria(@Param('id', ParseIntPipe) id: number) {
+    return this.categoriaService.findExerciciosByCategoria(id);
+  }
+
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   post(@Body() categoria: Categoria): Promise<Categoria> {

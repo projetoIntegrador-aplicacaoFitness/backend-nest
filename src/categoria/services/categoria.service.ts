@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, ILike, Repository } from "typeorm";
 import { Categoria } from "../entities/categoria.entity";
@@ -67,5 +67,18 @@ export class CategoriaService {
         return await this.categoriaRepository.delete(id);
 
     }
+
+    async findExerciciosByCategoria(id: number) {
+        const categoria = await this.categoriaRepository.findOne({
+          where: { id },
+          relations: ['exercicio'],
+        });
+    
+        if (!categoria) {
+          throw new NotFoundException(`Categoria com ID ${id} não encontrada.`);
+        }
+    
+        return categoria.exercicio; // Retorna apenas os exercícios da categoria
+      }
 
 }
